@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Subtopics Page</title>
+	<link rel="stylesheet" href="styles.css">
+	<meta charset="UTF-8">
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript">
+		// http://stackoverflow.com/questions/22209307/how-to-get-multiple-parameters-with-same-name-from-a-url-in-javascript
+		function getQueryParams() {
+		   qs = location.search;
+		   var params = [];
+		   var tokens;
+		   var re = /[?&]?([^=]+)=([^&]*)/g;
+
+		   while (tokens = re.exec(qs)){ 
+		       if (decodeURIComponent(tokens[1]) == "country")
+		       params.push(decodeURIComponent(tokens[2]));
+		   }
+		   return params;
+		}
+	</script>
+</head>
+<body>
+
+	<script type="text/javascript">
+		var ref = "results.html?topic=";
+		// var countryArray = getQueryParams();
+
+		// http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+		function getParameterByName(name, url) {
+		    if (!url) {
+		      url = window.location.href;
+		    }
+		    name = name.replace(/[\[\]]/g, "\\$&");
+		    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		        results = regex.exec(url);
+		    if (!results) return null;
+		    if (!results[2]) return '';
+		    return decodeURIComponent(results[2].replace(/\+/g, " "));
+		}
+
+		var countryArray = getParameterByName('countries');
+		var topic = getParameterByName('topic');
+		//document.getElementById("topicstring").innerHTML = "display results for topic: " + topic;
+		
+		// document.write("query string is: " + countryArray);
+		// document.write('topic: ' + topic + ' countries: ' + countryArray);
+		// document.getElementById("topicName").innerHTML = topic;
+
+	</script>
+	<div class="col-3">
+		<h2 class="inline">Subtopics</h2>
+		<button class="inline" id="back" onclick="goBack()">Back</button>
+
+		<script>
+	    function goBack() {
+	        window.history.back();
+	    }
+	    </script>
+	    
+		<div id="sociodemDiv" class="subtopic">
+			
+			<button type="button" value="general" class="secondary">General</button>
+
+			<div id="generalDiv" class="tertiary" style="display:none">
+				
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'gender&countries=' + countryArray +'">Gender of Respondent</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'race&countries=' + countryArray +'">Race of Respondent</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'age&countries=' + countryArray +'">Age of Respondent</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'language&countries=' + countryArray +'">Language of Respondent</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'education&countries=' + countryArray +'">Education of Respondent</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'religion&countries=' + countryArray +'">Religion of Respondent</a>');
+				</script>
+			</div>
+
+			<button type="button" value="location" class="secondary">Location</button>
+
+			<div id="locationDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'country&countries=' + countryArray +'">Country</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'sample&countries=' + countryArray +'">Urban or Rural Primary Sampling Unit</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'province&countries=' + countryArray +'">Province or Region</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'district&countries=' + countryArray +'">District</a>');
+				</script>
+			</div>
+
+			<button type="button" value="services" class="secondary">Local Services in the PSU/EA</button>
+
+			<div id="servicesDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'electricity&countries=' + countryArray +'">Electricity grid</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'water&countries=' + countryArray +'">Piped water system</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'sewage&countries=' + countryArray +'">Sewage system</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'cell&countries=' + countryArray +'">Cell phone service</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'postoffice&countries=' + countryArray +'">Post-office</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'school&countries=' + countryArray +'">School</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'policestation&countries=' + countryArray +'">Police station</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'clinic&countries=' + countryArray +'">Health clinic</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'market&countries=' + countryArray +'">Market stalls</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'policemen&countries=' + countryArray +'">Any policeman or police vehicles</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'soldiers&countries=' + countryArray +'">Soldiers</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'roadblockspolice&countries=' + countryArray +'">Roadblocks by police/army</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'roadblockssecurity&countries=' + countryArray +'">Roadblocks by private security</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'roadblockscomm&countries=' + countryArray +'">Roadblocks by local community</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'roads&countries=' + countryArray +'">Tarred/paved road</a>');
+				</script>
+			</div>
+
+			<button type="button" value="household" class="secondary">Household Characteristics</button>
+
+			<div id="householdDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'adults&countries=' + countryArray +'">Number of adults in household</a>');
+				</script>
+			</div>
+		</div>
+
+		<div id="conditionsDiv" class="subtopic">
+			<button type="button" value="interviewconditions" class="secondary">Interview Conditions</button>
+
+			<div id="interviewconditionsDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'lang&countries=' + countryArray +'">Language of interview</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'otherspresent&countries=' + countryArray +'">Others present</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'checkothers&countries=' + countryArray +'">Check with others</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'influenceothers&countries=' + countryArray +'">Influence others</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'approached&countries=' + countryArray +'">Approached by community/party representatives</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'feelthreatened&countries=' + countryArray +'">Feel threatened</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'physthreatened&countries=' + countryArray +'">Physically threatened</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'difficultyanswering&countries=' + countryArray +'">Proportion difficulty answering</a>');
+				</script>
+			</div>
+
+			<button type="button" value="attitude" class="secondary">Respondent Attitude</button>
+
+			<div id="attitudeDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'friendly&countries=' + countryArray +'">Respondent friendly</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'interested&countries=' + countryArray +'">Respondent interested</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'cooperative&countries=' + countryArray +'">Respondent cooperative</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'patient&countries=' + countryArray +'">Respondent patient</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'ease&countries=' + countryArray +'">Respondent at ease</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'honesty&countries=' + countryArray +'">Respondent honest</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'surveysponsor&countries=' + countryArray +'">Perceived survey sponsor</a>');
+				</script>
+			</div>
+
+			<button type="button" value="interviewerinfo" class="secondary">Interviewer Info</button>
+
+			<div id="interviewerinfoDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'intage&countries=' + countryArray +'">Interviewer\'s Age</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'intgender&countries=' + countryArray +'">Interviewer\'s Gender</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'intruralurban&countries=' + countryArray +'">Interviewer rural or urban</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'intlang&countries=' + countryArray +'">Interviewer\'s home language</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'inteducation&countries=' + countryArray +'">Interviewer\'s education</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'intethnicity&countries=' + countryArray +'">Interviewer\'s Ethnicity</a>');
+				</script>
+			</div>
+		</div>
+
+		<div id="economyDiv" class="subtopic">
+			<button type="button" value="national" class="secondary">National Economic Conditions</button>
+
+			<div id="nationalDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'presentecon&countries=' + countryArray +'">Country\'s present economic condition</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'pastecon&countries=' + countryArray +'">Country\'s economic condition compared to 12 months ago</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'futureecon&countries=' + countryArray +'">Country\'s economic condition in 12 months time</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'countrydirection&countries=' + countryArray +'">Overall direction of the country</a>');
+				</script>
+			</div>
+
+			<button type="button" value="personal" class="secondary">Personal Economic Conditions</button>
+
+			<div id="personalDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'livingcond&countries=' + countryArray +'">Your present living conditions</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'otherlivingcond&countries=' + countryArray +'">Your living conditions vs. others</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'nofood&countries=' + countryArray +'">How often gone without food</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'nowater&countries=' + countryArray +'">How often gone without water</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'nomedcare&countries=' + countryArray +'">How often gone without medical care</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'nocookingfuel&countries=' + countryArray +'">How often gone without cooking fuel</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'nocashincome&countries=' + countryArray +'">How often gone without cash income</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'notoilet&countries=' + countryArray +'">Location of toilet or latrine</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'watersource&countries=' + countryArray +'">Source of water for household use</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'employmentstat&countries=' + countryArray +'">Employment status</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'radio&countries=' + countryArray +'">Own radio</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'television&countries=' + countryArray +'">Own television</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'motorvehicle&countries=' + countryArray +'">Own motor vehicle, car or motorcycle</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'shelter&countries=' + countryArray +'">Type of shelter of respondent</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'roof&countries=' + countryArray +'">Roof of respondent\'s home</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'remittance&countries=' + countryArray +'">How often received remittances</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'mainelectric&countries=' + countryArray +'">Electric connection from mains</a>');
+				</script>
+			</div>
+		</div>
+
+		<div id="democracyDiv" class="subtopic">
+			<button type="button" value="rights" class="secondary">Rights and Freedoms</button>
+
+			<div id="rightsDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'freedomspeech&countries=' + countryArray +'">Freedom to say what you think</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'freedompolitical&countries=' + countryArray +'">Freedom to join any political organizations</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'freedomvote&countries=' + countryArray +'">Freedom to choose who to vote for</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'carefulspeech&countries=' + countryArray +'">How often careful what you say</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'govbans&countries=' + countryArray +'">Government bans organizations vs. join any</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'newspapersfree&countries=' + countryArray +'">Newspapers free to publish vs. government control</a>');
+				</script>
+			</div>
+
+			<button type="button" value="democracydemand" class="secondary">Demand for Democracy</button>
+
+			<div id="democracydemandDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'rejectoneparty&countries=' + countryArray +'">Reject one-party rule</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'rejectmilitary&countries=' + countryArray +'">Reject military rule</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'rejectoneman&countries=' + countryArray +'">Reject one-man rule</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'demsupport&countries=' + countryArray +'">Support for democracy</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'leaderelections&countries=' + countryArray +'">Choose leaders through elections vs. other methods</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'poliparties&countries=' + countryArray +'">Political parties divisive vs. many parties needed</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'prestermlimits&countries=' + countryArray +'">Presidential two term limit vs. no term limits</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'govaccountability&countries=' + countryArray +'">Gov gets things done but no citizen influence vs. Gov accountable to citizens</a>');
+				</script>
+			</div>
+
+			<button type="button" value="democracysupply" class="secondary">Supply for Democracy</button>
+
+			<div id="democracysupplyDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'demextent&countries=' + countryArray +'">Extent of democracy</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'demsatisfaction&countries=' + countryArray +'">Satisfaction with democracy</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'mediaabuse&countries=' + countryArray +'">How often news media abuse its freedom</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'partyconflict&countries=' + countryArray +'">How often party competition leads to conflict</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'preslawignore&countries=' + countryArray +'">How often president ignores laws</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'partysilence&countries=' + countryArray +'">How often opposition parties silenced by government</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'presparliamentignore&countries=' + countryArray +'">How often president ignores parliament</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'lastelection&countries=' + countryArray +'">Freeness and fairness of the last national election</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'fairvotecount&countries=' + countryArray +'">Elections: fair count of votes</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'mediareveal&countries=' + countryArray +'">How effective the news media reveals gov mistakes and corruption</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'oppositionparty&countries=' + countryArray +'">Elections: opposition prevented from running</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'fairmediacoverage&countries=' + countryArray +'">Elections: fair media coverage</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'voterbribery&countries=' + countryArray +'">Elections: voters are bribed</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'voterchoice&countries=' + countryArray +'">Elections: voters have genuine choice</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'voterthreatened&countries=' + countryArray +'">Elections: voters threatened</a>');
+				</script>
+			</div>
+
+			<button type="button" value="democracymeaning" class="secondary">Meaning of Democracy</button>
+
+			<div id="democracymeaningDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'demunderstand&countries=' + countryArray +'">Understanding democracy</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'demmeaning&countries=' + countryArray +'">Meaning of democracy</a>');
+				</script>
+			</div>
+
+			<button type="button" value="legitimacy" class="secondary">System Legitimacy</button>
+
+			<div id="legitimacyDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'courtdecision&countries=' + countryArray +'">Courts make binding decisions</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'lawobey&countries=' + countryArray +'">People must obey the law</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'taxpayment&countries=' + countryArray +'">People must pay taxes</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'obeygov&countries=' + countryArray +'">Obey government always vs. only if vote for it</a>');
+				</script>
+			</div>
+
+			<button type="button" value="horizontal" class="secondary">Horizontal Accountability</button>
+
+			<div id="horizontalDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'parlvspres&countries=' + countryArray +'">Parliament makes laws vs. president does</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'presfree&countries=' + countryArray +'">President free to act vs. obey the laws and cours</presmonitor>');
+					document.write('<a class="anchorButton" href="'+ ref +'district&countries=' + countryArray +'">President monitored by parliament vs. free to act on own</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'opppartiescoop&countries=' + countryArray +'">Opposition parties examine gov vs. cooperate</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'mediacheck&countries=' + countryArray +'">Media checks gov vs. avoid negative reporting</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'voterviewelection&countries=' + countryArray +'">Elections ensure voters\'s views are reflected</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'votersremoveleaders&countries=' + countryArray +'">Elections enable voters to remove leaders from office</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'peopleleaderinterests&countries=' + countryArray +'">Leaders serve interests of people or their own</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'rulingoppparties&countries=' + countryArray +'">Main difference between ruling and opposition parties</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'pricecontrol&countries=' + countryArray +'">Ruling vs. opposition: controlling prices</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'jobcreation&countries=' + countryArray +'">Ruling vs. opposition: creating jobs</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'healthimprove&countries=' + countryArray +'">Ruling vs. opposition: improving health</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'fightcorruption&countries=' + countryArray +'">Ruling vs. opposition: fighting corruption</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'oppviable&countries=' + countryArray +'">Political opposition is viable alternative</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'polisolveproblem&countries=' + countryArray +'">Other political party could solve first problem</a>');
+				</script>
+			</div>
+		</div>
+
+		<div id="institutionsDiv" class="subtopic">
+			<button type="button" value="president" class="secondary">President/Presidency</button>
+
+			<div id="presidentDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'prestrust&countries=' + countryArray +'">Trust president</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'presperformance&countries=' + countryArray +'">Performance: President</a>');
+				</script>
+			</div>
+
+			<button type="button" value="parliament" class="secondary">MPs/Parliament/National Assembly</button>
+
+			<div id="parliamentDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'parltrust&countries=' + countryArray +'">Trust parliament/national assembly</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'parllisten&countries=' + countryArray +'">Members of parliament listen</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'natlassembly&countries=' + countryArray +'">Performance: MP/National Assembly rep.</a>');
+				</script>
+			</div>
+
+			<button type="button" value="localgov" class="secondary">Local Government Counil/Councilors</button>
+
+			<div id="localgovDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'trustlocalgov&countries=' + countryArray +'">Trust your elected local government council</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'trustnationalleaders&countries=' + countryArray +'">Trust national leaders</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'localgovlistens&countries=' + countryArray +'">Local government councilors listen</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'localgovcouncilor&countries=' + countryArray +'">Performance: local government councilor</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'traditionalleader&countries=' + countryArray +'">Performance: traditional leader</a>');
+				</script>
+			</div>
+
+			<button type="button" value="courts" class="secondary">Courts and Security</button>
+
+			<div id="courtsDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'trustpolice&countries=' + countryArray +'">Trust police</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'trustarmy&countries=' + countryArray +'">Trust army</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'trustcourts&countries=' + countryArray +'">Trust courts of law</a>');
+				</script>
+			</div>
+
+			<button type="button" value="trust" class="secondary">Trust - Others</button>
+
+			<div id="trustDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'trustelectoral&countries=' + countryArray +'">Trust national electoral commission</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'trustrulingparty&countries=' + countryArray +'">Trust the ruling party</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'trusttaxdept&countries=' + countryArray +'">Trust tax department</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'trustopp&countries=' + countryArray +'">Trust oppsotion political parties</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'trustreligious&countries=' + countryArray +'">Trust religious leaders</a>');
+				</script>
+			</div>
+		</div>
+
+		<div id="participationDiv" class="subtopic">
+			<button type="button" value="poliengage" class="secondary">Political Engagement</button>
+
+			<div id="poliengageDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'publicaffairs&countries=' + countryArray +'">Interest in public affairs</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'politicsdiscuss&countries=' + countryArray +'">Discuss politics</a>');
+				</script>
+			</div>
+
+			<button type="button" value="membership" class="secondary">Membership</button>
+
+			<div id="membershipDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'memberreligious&countries=' + countryArray +'">Member of religious group</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'volunteer&countries=' + countryArray +'">Member of voluntary association or community group</a>');
+				</script>
+			</div>
+
+			<button type="button" value="civilaction" class="secondary">Civil Action</button>
+
+			<div id="civilactionDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'attendmeetings&countries=' + countryArray +'">Attend a community meeting</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'raiseissues&countries=' + countryArray +'">Join others to raise an issue</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'protest&countries=' + countryArray +'">Attend a demonstration or protest march</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'refusetaxpay&countries=' + countryArray +'">Refuse to pay tax or fee to government</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'voted&countries=' + countryArray +'">Voting in the most recent national election</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'campaignrally&countries=' + countryArray +'">Last national election: attend a campaign rally</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'campaignmeeting&countries=' + countryArray +'">Last national election: attend a campaign meeting</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'persuadevote&countries=' + countryArray +'">Last national election: persuade others to vote for a certain candidate or party</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'workcandidate&countries=' + countryArray +'">Last national election: work for a candidate or party</a>');
+				</script>
+			</div>
+
+			<button type="button" value="contacting" class="secondary">Contacting</button>
+
+			<div id="contactingDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'contactlocalgov&countries=' + countryArray +'">Contact local government councilor</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'contactmp&countries=' + countryArray +'">Contact MP</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'contactgov&countries=' + countryArray +'">Contact official of a government agency</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'contactparty&countries=' + countryArray +'">Contact political part official</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'contactreligious&countries=' + countryArray +'">Contact religious leader</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'contacttraditional&countries=' + countryArray +'">Contact traditional leader</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'contactmedia&countries=' + countryArray +'">Contact media</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'contactalone&countries=' + countryArray +'">Contact alone or in group</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'contacthelp&countries=' + countryArray +'">Contact government official for help</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'contactproblem&countries=' + countryArray +'">Contact for community or personal problem</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'neighborreligion&countries=' + countryArray +'">Neighbors: people of different religion</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'neighborethnicity&countries=' + countryArray +'">Neighbors: people of different ethnicity</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'neighborhomo&countries=' + countryArray +'">Neighbors: Homosexuals</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'neighborhiv&countries=' + countryArray +'">Neighbors: people with HIV/AIDS</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'neighborimmigrant&countries=' + countryArray +'">Neighbors: immigrants and foreign workers</a>');
+				</script>
+			</div>
+		</div>
+
+		<div id="govDiv" class="subtopic">
+			<button type="button" value="centralgov" class="secondary">Central Government Performance</button>
+
+			<div id="centralgovDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'centralecon&countries=' + countryArray +'">Handling managing the economy</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'livingstandards&countries=' + countryArray +'">Handling improving living standards of the poor</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'centraljobcreation&countries=' + countryArray +'">Handling creating jobs</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'centralpricedown&countries=' + countryArray +'">Handling keeping prices down</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'centralincomegaps&countries=' + countryArray +'">Handling narrowing income gaps</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'centralcrimereduction&countries=' + countryArray +'">Handling reducing crime</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'centralhealth&countries=' + countryArray +'">Handling improving basic health services</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'centraleducation&countries=' + countryArray +'">Handling addressing educational needs</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'centralwater&countries=' + countryArray +'">Handling providing water and sanitation services</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'centralfood&countries=' + countryArray +'">Handling ensuring enough to eat</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'centralcorruption&countries=' + countryArray +'">Handling fighting corruption</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'centralroads&countries=' + countryArray +'">Handling maintaining roads and bridges</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'centralelectricity&countries=' + countryArray +'">Handling providing reliable electric supply</a>');
+				</script>
+			</div>
+
+			<button type="button" value="localgovperf" class="secondary">Local Government Performance</button>
+
+			<div id="localgovperfDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'localroads&countries=' + countryArray +'">Local gov handling maintaining roads</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'localmarkets&countries=' + countryArray +'">Local gov handling maintaining local markets</a>');
+				</script>
+			</div>
+
+			<button type="button" value="publicservice" class="secondary">Quality of Public Services</button>
+
+			<div id="publicserviceDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'identitydoc&countries=' + countryArray +'">Difficulty to obtain identity document</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'publicgovservice&countries=' + countryArray +'">Difficulty to obtain services from the government</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'putblicpolice&countries=' + countryArray +'">Difficulty to obtain help from the police</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'publicschool&countries=' + countryArray +'">Difficulty to obtain public school services</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'publicmedical&countries=' + countryArray +'">Difficulty to obtain medical treatment</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'publicassistance&countries=' + countryArray +'">Difficulty to obtain assistance from courts</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'courtsexpensive&countries=' + countryArray +'">Problems with courts: too expensive</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'courtscomplex&countries=' + countryArray +'">Problems with courts: too complex</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'courtsadvice&countries=' + countryArray +'">Problems with courts: no advice</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'courtsjudge&countries=' + countryArray +'">Problems with courts: judge did not listen</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'courtsdelays&countries=' + countryArray +'">Problems with courts: long delays</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'problems&countries=' + countryArray +'">Most important problems</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'firstproblems&countries=' + countryArray +'">Handling first problem</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'courttribunal&countries=' + countryArray +'">Contact with government court or tribunal</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'casetocourt&countries=' + countryArray +'">Reason for not taking case to court</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'paygovservices&countries=' + countryArray +'">Right or wrong: not paying for the government services</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'mpjobs&countries=' + countryArray +'">Who responsible: MPs do jobs</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'councilorsjobs&countries=' + countryArray +'">Who responsible: local councilors do jobs</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'presidentjob&countries=' + countryArray +'">Who responsible: president does job</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'firstinvest&countries=' + countryArray +'">First priority for investment</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'secondinvest&countries=' + countryArray +'">Second priority for investment</a>');
+				</script>
+			</div>
+		</div>
+
+		<div id="citizenshipDiv" class="subtopic">
+			<button type="button" value="groupidentity" class="secondary">Group Identity</button>
+
+			<div id="groupidentityDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'tribe&countries=' + countryArray +'">Tribe or ethnic group</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'ethnicunfair&countries=' + countryArray +'">Ethnic group treated unfairly</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'ethnicidentity&countries=' + countryArray +'">Ethnic or national identity</a>');
+				</script>
+			</div>
+
+			<button type="button" value="poliaffiliation" class="secondary">Political Affiliation</button>
+
+			<div id="poliaffiliationDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'closetoparty&countries=' + countryArray +'">Close to political party</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'whichparty&countries=' + countryArray +'">Which party</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'partyvote&countries=' + countryArray +'">Vote for which party</a>');
+				</script>
+			</div>
+
+			<button type="button" value="citi" class="secondary">Citizenship</button>
+
+			<div id="citiDiv" class="tertiary" style="display:none">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'citizenvote&countries=' + countryArray +'">Citizens vote</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'citizencritical&countries=' + countryArray +'">Citizens avoid criticizing government</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'citizencomplain&countries=' + countryArray +'">Citizens complain for poor services</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'citizenassist&countries=' + countryArray +'">Citizens request personal assistance from elected leaders</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'citizenpay&countries=' + countryArray +'">Citizens pay taxes</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'citizenagree&countries=' + countryArray +'">Citizens agree with community on political issues</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'citizengovaction&countries=' + countryArray +'">Join others to request government action</a>');
+				</script>
+			</div>
+		</div>
+
+		<div id="equalityDiv" class="subtopic">
+
+			<div class="tertiary">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'peopleunequal&countries=' + countryArray +'">How often people treated unequally</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'officialspunish&countries=' + countryArray +'">How often officials unpunished</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'peoplepunish&countries=' + countryArray +'">How often ordinary people unpunished</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'menwomenleaders&countries=' + countryArray +'">Men only as leaders vs. women leaders ok</a>');
+				</script>
+			</div>
+		</div>
+
+		<div id="taxationDiv" class="subtopic">
+			<div id="groupidentityDiv" class="tertiary">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'musttax&countries=' + countryArray +'">Citizens must pay taxes vs. no need to tax the people</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'rightwrongtax&countries=' + countryArray +'">Right or wrong: not paying the taxes</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'taxhealth&countries=' + countryArray +'">Pay more taxes to increase health spending</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'taxspending&countries=' + countryArray +'">Difficulty to find out what taxes or fees to pay</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'taxavoid&countries=' + countryArray +'">Difficulty to avoid paying taxes</a>');
+				</script>
+			</div>
+		</div>
+
+		<div id="crimeDiv" class="subtopic">
+			<div id="groupidentityDiv" class="tertiary">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'intimidation&countries=' + countryArray +'">How much fear political intimidation or violence</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'unsafewalking&countries=' + countryArray +'">How often felt unsafe walking in neighborhood</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'homecrime&countries=' + countryArray +'">How often feared crime in home</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'housetheft&countries=' + countryArray +'">Had something stolen from house</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'attacked&countries=' + countryArray +'">Have been physically attacked</a>');
+				</script>
+			</div>
+		</div>
+
+		<div id="corruptionDiv" class="subtopic">
+			<div id="corruptDiv" class="tertiary">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'corruptgov&countries=' + countryArray +'">Corruption: government officials</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'corruptofficial&countries=' + countryArray +'">Corruption: tax officials</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'corruptcouncil&countries=' + countryArray +'">Corruption: local government councilors</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'corrupttraditional&countries=' + countryArray +'">Corruption: traditional leaders</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'corruptreligious&countries=' + countryArray +'">Corruption: religious leaders</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'corruptbusiness&countries=' + countryArray +'">Corruption: business executives</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'corruptlevel&countries=' + countryArray +'">Level of corruption</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'corruptpresident&countries=' + countryArray +'">Corruption: office of the Presidency</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'corruptparliament&countries=' + countryArray +'">Corruption: Members of Parliament</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'corruptpolice&countries=' + countryArray +'">Corruption: Police</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'corruptjudge&countries=' + countryArray +'">Corruption: judges and magistrates</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'bribegov&countries=' + countryArray +'">Reported payment of bribes to government</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'bribeaction&countries=' + countryArray +'">Bribery: authorities took action</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'briberetaliation&countries=' + countryArray +'">Bribery: suffered retaliation</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'reportcorrupt&countries=' + countryArray +'">Main reason for not reporting corruption</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'bribedoc&countries=' + countryArray +'">Pay bribe for document or permit</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'bribeclinic&countries=' + countryArray +'">Pay bribe for treatment at public clinic or hospital</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'bribepolice&countries=' + countryArray +'">Pay bribe to avoid problem with police</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'bribeschool&countries=' + countryArray +'">Pay bribe for school services</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'bribefavor&countries=' + countryArray +'">Pay bribe: do a favor for a government official</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'bribecourts&countries=' + countryArray +'">Pay bribe to get assistance from courts</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'fightcorrupt&countries=' + countryArray +'">People can fight corruption</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'combatcorrupt&countries=' + countryArray +'">Most effective way to combat corruption</a>');
+				</script>
+			</div>
+		</div>
+
+		<div id="internationalDiv" class="subtopic">
+			<div id="internationalRelations" class="tertiary">
+				<script type="text/javascript">
+					document.write('<a class="anchorButton" href="'+ ref +'regionalorg&countries=' + countryArray +'">Regional organization helps country</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'africaunion&countries=' + countryArray +'">Africa Union helps country</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'chinaecon&countries=' + countryArray +'">China\'s influence on economy</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'chinagoodbad&countries=' + countryArray +'">China\'s influence: positive or negative</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'positivechina&countries=' + countryArray +'">Positive image of China</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'negativechina&countries=' + countryArray +'">Negative image of China</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'chinaassist&countries=' + countryArray +'">China\'s assistance does a good job at meeting country\'s needs</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'bordermovement&countries=' + countryArray +'">Free movement across borders vs. limit movement</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'preventabuse&countries=' + countryArray +'">Regional responsibility to prevent abuses vs. respect soveriegnty of nations</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'borderclose&countries=' + countryArray +'">Difficulty of closing borders</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'countryinfluence&countries=' + countryArray +'">Country with most influence</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'modelcountry&countries=' + countryArray +'">Model country for development</a>');
+				</script>
+			</div>
+		</div>
+
+		<div id="publicDiv" class="subtopic">
+			
+		</div>
+
+		<div id="otherDiv" class="subtopic">
+			
+		</div>
+
+		<div id="menaDiv" class="subtopic">
+			
+		</div>
+
+		</div>
+		<script>
+		
+
+		$(function(){
+
+		        // document.getElementById("topicName").innerHTML = topic;
+		        // http://stackoverflow.com/questions/6967081/show-hide-multiple-divs-with-jquery
+		        $('.subtopic').hide();
+		        $('#'+topic+'Div').show();
+
+		        $('.secondary').click(function(){
+		              $('.tertiary').hide();
+		              $('#'+$(this).attr('value')+'Div').show();
+		        });
+		});
+
+		
+		</script>
+</body>
+</html>

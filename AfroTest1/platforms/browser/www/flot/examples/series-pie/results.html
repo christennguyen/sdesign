@@ -1,0 +1,621 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Results</title>
+	<link href="../examples.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+
+	.demo-container {
+		position: relative;
+		height: 400px;
+	}
+
+	#placeholder {
+		width: 550px;
+	}
+
+	#menu {
+		position: absolute;
+		top: 20px;
+		left: 625px;
+		bottom: 20px;
+		right: 20px;
+		width: 200px;
+	}
+
+	</style>
+	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../../excanvas.min.js"></script><![endif]-->
+	<script language="javascript" type="text/javascript" src="../../jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="../../jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="../../jquery.flot.pie.js"></script>
+	<script type="text/javascript">
+
+	$(function() {
+
+		// Example Data
+
+		//var data = [
+		//	{ label: "Series1",  data: 10},
+		//	{ label: "Series2",  data: 30},
+		//	{ label: "Series3",  data: 90},
+		//	{ label: "Series4",  data: 70},
+		//	{ label: "Series5",  data: 80},
+		//	{ label: "Series6",  data: 110}
+		//];
+
+		//var data = [
+		//	{ label: "Series1",  data: [[1,10]]},
+		//	{ label: "Series2",  data: [[1,30]]},
+		//	{ label: "Series3",  data: [[1,90]]},
+		//	{ label: "Series4",  data: [[1,70]]},
+		//	{ label: "Series5",  data: [[1,80]]},
+		//	{ label: "Series6",  data: [[1,0]]}
+		//];
+
+		//var data = [
+		//	{ label: "Series A",  data: 0.2063},
+		//	{ label: "Series B",  data: 38888}
+		//];
+
+		// http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+		function getParameterByName(name, url) {
+		    if (!url) {
+		      url = window.location.href;
+		    }
+		    name = name.replace(/[\[\]]/g, "\\$&");
+		    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		        results = regex.exec(url);
+		    if (!results) return null;
+		    if (!results[2]) return '';
+		    return decodeURIComponent(results[2].replace(/\+/g, " "));
+		}
+
+		var topic = getParameterByName('topic');
+		//document.getElementById("topicstring").innerHTML = "display results for topic: " + topic;
+
+		var countries = getParameterByName('countries');
+		// document.getElementById("countrystring").innerHTML = "countries: " + countries;
+
+		var res = countries.split(",");
+		// if(res.length > 1){
+		// 	var countriesString = "for countries: ";
+		// 	for(count = 0; count < res.length; count++){
+		// 		countriesString += (res[count] + " ");
+		// 	}
+		// }
+		// else{
+		// 	var countriesString = "for country " + res;
+		// }
+		// // document.getElementById("countrystring").innerHTML = countriesString;
+		document.getElementById("countrystring").innerHTML = "display results for topic: " + topic + " in the countries: " + res;
+
+
+
+		//some query here
+		//grab topic and countries
+		//initialize data dictionary
+
+		var question;
+		if(topic == "gender"){
+			question = '"Respondent\'s gender"';
+			var data = [
+			{ label: "Male",  data: 35},
+			{ label: "Female",  data: 30}
+			];
+		}
+		else if(topic == "race"){
+			question = '"Respondent\'s race"';
+			var data = [
+			{ label: "Arab/Lebanese/North African",  data: 1200}
+			];
+		}
+		else if(topic == "age"){
+			question = '"Respondent\'s race"';
+			var data = [
+			{ label: "15-29",  data: 383},
+			{ label: "30-49",  data: 527},
+			{ label: "50 and up",  data: 290}
+			];
+		}
+		else if(topic == "language"){
+			question = '"Which [Ghanaian] language is your home language?"';
+			var data = [
+			{ label: "French",  data: 7},
+			{ label: "ALG: Algerian Arabic",  data: 1110},
+			{ label: "ALG: Berber",  data: 83}
+			];
+		}
+		else if(topic == "education"){
+			question = '"What is your highest level of education?"';
+			var data = [
+			{ label: "No formal schooling",  data: 66},
+			{ label: "Informal schooling only",  data: 70},
+			{ label: "Some primary schooling",  data: 137},
+			{ label: "Primary school completed",  data: 139},
+			{ label: "Some secondary/high school",  data: 197},
+			{ label: "Secondaary school/high school completed",  data: 134},
+			{ label: "Post-secondary qualifications, other than university",  data: 76},
+			{ label: "Some university",  data: 163},
+			{ label: "University completed",  data: 149},
+			{ label: "Post-graduate",  data: 56},
+			{ label: "Don't know",  data: 14},
+			];
+		}
+		else if(topic == "religion"){
+			question = '"What is your religion, if any?"';
+			var data = [
+			{ label: "Muslim only",  data: 1023},
+			{ label: "Sunni only",  data: 158},
+			{ label: "Tijaniya Brotherhood",  data: 3},
+			{ label: "Qadiriya Brotherhood",  data: 3},
+			{ label: "Other",  data: 13}
+			];
+		}
+		else{
+			document.getElementById("error").innerHTML = "topic not yet implemented - showing default data";
+			var data = [
+			{ label: "Male",  data: 35},
+			{ label: "Female",  data: 30}
+			];
+		}
+
+		document.getElementById("question").innerHTML = question;
+
+		var placeholder = $("#placeholder");
+
+		$("#example-1").click(function() {
+
+			placeholder.unbind();
+
+			$("#title").text("Default pie chart");
+			$("#description").text("The default pie chart with no options set.");
+
+			$.plot(placeholder, data, {
+				series: {
+					pie: { 
+						show: true
+					}
+				}
+			});
+
+			setCode([
+				"$.plot('#placeholder', data, {",
+				"    series: {",
+				"        pie: {",
+				"            show: true",
+				"        }",
+				"    }",
+				"});"
+			]);
+		});
+
+		$("#example-2").click(function() {
+
+			placeholder.unbind();
+
+			$("#title").text("Default without legend");
+			$("#description").text("The default pie chart when the legend is disabled. Since the labels would normally be outside the container, the chart is resized to fit.");
+
+			$.plot(placeholder, data, {
+				series: {
+					pie: { 
+						show: true
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+			setCode([
+				"$.plot('#placeholder', data, {",
+				"    series: {",
+				"        pie: {",
+				"            show: true",
+				"        }",
+				"    },",
+				"    legend: {",
+				"        show: false",
+				"    }",
+				"});"
+			]);
+		});
+
+		$("#example-3").click(function() {
+
+			placeholder.unbind();
+
+			$("#title").text("Custom Label Formatter");
+			$("#description").text("Added a semi-transparent background to the labels and a custom labelFormatter function.");
+
+			$.plot(placeholder, data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 1,
+						label: {
+							show: true,
+							radius: 1,
+							formatter: labelFormatter,
+							background: {
+								opacity: 0.8
+							}
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+			setCode([
+				"$.plot('#placeholder', data, {",
+				"    series: {",
+				"        pie: {",
+				"            show: true,",
+				"            radius: 1,",
+				"            label: {",
+				"                show: true,",
+				"                radius: 1,",
+				"                formatter: labelFormatter,",
+				"                background: {",
+				"                    opacity: 0.8",
+				"                }",
+				"            }",
+				"        }",
+				"    },",
+				"    legend: {",
+				"        show: false",
+				"    }",
+				"});"
+			]);
+		});
+
+		$("#example-4").click(function() {
+
+			placeholder.unbind();
+
+			$("#title").text("Label Radius");
+			$("#description").text("Slightly more transparent label backgrounds and adjusted the radius values to place them within the pie.");
+
+			$.plot(placeholder, data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 1,
+						label: {
+							show: true,
+							radius: 3/4,
+							formatter: labelFormatter,
+							background: {
+								opacity: 0.5
+							}
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+			setCode([
+				"$.plot('#placeholder', data, {",
+				"    series: {",
+				"        pie: {",
+				"            show: true,",
+				"            radius: 1,",
+				"            label: {",
+				"                show: true,",
+				"                radius: 3/4,",
+				"                formatter: labelFormatter,",
+				"                background: {",
+				"                    opacity: 0.5",
+				"                }",
+				"            }",
+				"        }",
+				"    },",
+				"    legend: {",
+				"        show: false",
+				"    }",
+				"});"
+			]);
+		});
+
+		$("#example-5").click(function() {
+
+			placeholder.unbind();
+
+			$("#title").text("Label Styles #1");
+			$("#description").text("Semi-transparent, black-colored label background.");
+
+			$.plot(placeholder, data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 1,
+						label: {
+							show: true,
+							radius: 3/4,
+							formatter: labelFormatter,
+							background: { 
+								opacity: 0.5,
+								color: "#000"
+							}
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+			setCode([
+				"$.plot('#placeholder', data, {",
+				"    series: {",
+				"        pie: { ",
+				"            show: true,",
+				"            radius: 1,",
+				"            label: {",
+				"                show: true,",
+				"                radius: 3/4,",
+				"                formatter: labelFormatter,",
+				"                background: { ",
+				"                    opacity: 0.5,",
+				"                    color: '#000'",
+				"                }",
+				"            }",
+				"        }",
+				"    },",
+				"    legend: {",
+				"        show: false",
+				"    }",
+				"});"
+			]);
+		});
+
+		$("#example-6").click(function() {
+
+			placeholder.unbind();
+
+			$("#title").text("Label Styles #2");
+			$("#description").text("Semi-transparent, black-colored label background placed at pie edge.");
+
+			$.plot(placeholder, data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 3/4,
+						label: {
+							show: true,
+							radius: 3/4,
+							formatter: labelFormatter,
+							background: { 
+								opacity: 0.5,
+								color: "#000"
+							}
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+			setCode([
+				"$.plot('#placeholder', data, {",
+				"    series: {",
+				"        pie: {",
+				"            show: true,",
+				"            radius: 3/4,",
+				"            label: {",
+				"                show: true,",
+				"                radius: 3/4,",
+				"                formatter: labelFormatter,",
+				"                background: {",
+				"                    opacity: 0.5,",
+				"                    color: '#000'",
+				"                }",
+				"            }",
+				"        }",
+				"    },",
+				"    legend: {",
+				"        show: false",
+				"    }",
+				"});"
+			]);
+		});
+
+		$("#example-7").click(function() {
+
+			placeholder.unbind();
+
+			$("#title").text("Hidden Labels");
+			$("#description").text("Labels can be hidden if the slice is less than a given percentage of the pie (10% in this case).");
+
+			$.plot(placeholder, data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 1,
+						label: {
+							show: true,
+							radius: 2/3,
+							formatter: labelFormatter,
+							threshold: 0.1
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+			setCode([
+				"$.plot('#placeholder', data, {",
+				"    series: {",
+				"        pie: {",
+				"            show: true,",
+				"            radius: 1,",
+				"            label: {",
+				"                show: true,",
+				"                radius: 2/3,",
+				"                formatter: labelFormatter,",
+				"                threshold: 0.1",
+				"            }",
+				"        }",
+				"    },",
+				"    legend: {",
+				"        show: false",
+				"    }",
+				"});"
+			]);
+		});
+
+		$("#example-8").click(function() {
+
+			placeholder.unbind();
+
+			$("#title").text("Combined Slice");
+			$("#description").text("Multiple slices less than a given percentage (5% in this case) of the pie can be combined into a single, larger slice.");
+
+			$.plot(placeholder, data, {
+				series: {
+					pie: { 
+						show: true,
+						combine: {
+							color: "#999",
+							threshold: 0.05
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+			setCode([
+				"$.plot('#placeholder', data, {",
+				"    series: {",
+				"        pie: {",
+				"            show: true,",
+				"            combine: {",
+				"                color: '#999',",
+				"                threshold: 0.1",
+				"            }",
+				"        }",
+				"    },",
+				"    legend: {",
+				"        show: false",
+				"    }",
+				"});"
+			]);
+		});
+
+
+		$("#example-11").click(function() {
+
+			placeholder.unbind();
+
+			$("#title").text("Donut Hole");
+			$("#description").text("A donut hole can be added.");
+
+			$.plot(placeholder, data, {
+				series: {
+					pie: { 
+						innerRadius: 0.5,
+						show: true
+					}
+				}
+			});
+
+			setCode([
+				"$.plot('#placeholder', data, {",
+				"    series: {",
+				"        pie: {",
+				"            innerRadius: 0.5,",
+				"            show: true",
+				"        }",
+				"    }",
+				"});"
+			]);
+		});
+
+	
+		// Show the initial default chart
+
+		$("#example-1").click();
+
+		// Add the Flot version string to the footer
+
+		$("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+	});
+
+	// A custom label formatter used by several of the plots
+
+	function labelFormatter(label, series) {
+		return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+	}
+
+	//
+
+	function setCode(lines) {
+		$("#code").text(lines.join("\n"));
+	}
+
+	</script>
+</head>
+<body>
+	<div>
+		<h2>Results</h2>
+
+		<div id="farright">
+			<button id="back" onclick="goBack()">Back</button>
+		</div>
+	</div>
+	
+
+	<script>
+	function goBack() {
+	    window.history.back();
+	}
+	</script>
+
+	<div>
+		<p id="topicstring"></p>
+		<p id="countrystring"></p>
+		<p id="question"></p>
+		<p id="error"></p>
+	</div>
+
+
+	<div id="content">
+		<div>
+			<h3 id="title"></h3>
+			<div id="optionsdiv">
+				<button id="options">Pie</button>
+				<button id="options">Bar</button>
+			</div>
+		</div>
+		
+		<div class="demo-container">
+			
+			<div id="placeholder" class="demo-placeholder"></div>
+			<div id="menu">
+				<button id="example-1">Default Options</button>
+				<button id="example-2">Without Legend</button>
+				<button id="example-3">Label Formatter</button>
+				<button id="example-4">Label Radius</button>
+				<button id="example-5">Label Styles #1</button>
+				<button id="example-6">Label Styles #2</button>
+				<button id="example-7">Hidden Labels</button>
+				<button id="example-8">Combined Slice</button>
+				<button id="example-11">Donut Hole</button>
+			</div>
+		</div>
+
+	</div>
+
+
+</body>
+</html>

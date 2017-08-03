@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Main topics</title>
+	<link rel="stylesheet" href="styles.css">
+	<meta charset="UTF-8">
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript">
+		// http://stackoverflow.com/questions/22209307/how-to-get-multiple-parameters-with-same-name-from-a-url-in-javascript
+		function getQueryParams() {
+		   qs = location.search;
+		   var params = [];
+		   var tokens;
+		   var re = /[?&]?([^=]+)=([^&]*)/g;
+
+		   while (tokens = re.exec(qs)){ 
+		       if (decodeURIComponent(tokens[1]) == "country")
+		       params.push(decodeURIComponent(tokens[2]));
+		   }
+		   return params;
+		}
+	</script>
+</head>
+<body>
+
+	<script type="text/javascript">
+		// var ref1 = "flot/examples/series-pie/results.html?topic=";
+		var ref = "subtopics.html?topic=";
+		var countryArray = getQueryParams();
+		var countryRef = "&countries=" + countryArray;
+		
+		// document.write("query string is: " + countryArray);
+
+	</script>
+			
+
+		<div class="maintopics">
+
+			<h2 class="inline">Survey Topics</h2>
+			<button class="inline" id="back" onclick="goBack()">Back</button>
+
+			<script>
+		    function goBack() {
+		        window.history.back();
+		    }
+		    </script>
+		    	
+			<script type="text/javascript">
+					// document.write('country string is: ' + countryArray);
+					document.write('<a class="anchorButton" href="'+ ref +'sociodem&countries=' + countryArray +'">Socio-Demographics &amp; Sample Characteristics</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'conditions&countries=' + countryArray +'">Interview Conditions</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'economy&countries=' + countryArray +'">Economy</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'democracy&countries=' + countryArray +'">Democracy and Politics</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'institutions&countries=' + countryArray +'">Institutions and Leaders</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'participation&countries=' + countryArray +'">Participation - Civic Engagement</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'gov&countries=' + countryArray +'">Government Services and Performance Policy Preferences</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'citizenship&countries=' + countryArray +'">Citizenship and Identity</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'equality&countries=' + countryArray +'">Equality and Gender</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'taxation&countries=' + countryArray +'">Taxation</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'crime&countries=' + countryArray +'">Crime and Security</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'public&countries=' + countryArray +'">Public Services</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'other&countries=' + countryArray +'">Other</a>');
+					document.write('<a class="anchorButton" href="'+ ref +'mena&countries=' + countryArray +'">MENA Issues</a>');
+				</script>
+		</div>
+
+</body>
+</html>

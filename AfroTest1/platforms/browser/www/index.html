@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="styles.css">
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Countries Page</title>
+    </head>
+    <body>
+        <!-- <script type="text/javascript" src="cordova.js"></script> -->
+        <script type="text/javascript">
+
+            // http://stackoverflow.com/questions/386281/how-to-implement-select-all-check-box-in-html
+            // function toggle(source) {
+            //   checkboxes = document.getElementsByName('country');
+            //   for(var i=0, n=checkboxes.length;i<n;i++) {
+            //     checkboxes[i].checked = source.checked;
+            //   }
+            // }
+
+            
+            // $(function(){
+            //       $('#submit').prop("disabled", true);
+            //       $('input:checkbox').click(function() {
+            //               if ($(this).is(':checked')) {
+            //                   $('#submit').prop("disabled", false);
+            //               } else {
+            //               if ($('.check').filter(':checked').length < 1){
+            //                   $('#submit').attr('disabled',true);}
+            //               }
+            //       });  
+            // });
+        </script>
+
+        <div class="center">
+            
+            <header id=banner>
+                <h1>Taking Afrobarometer Data Everywhere</h1>
+            </header>
+
+            <h2>Country Selection</h2>
+            <form action="maintopics.html">
+                <div class="divtop">
+                    <!-- <input type="checkbox" onclick="toggle(this)">Select/Deselect All<br> -->
+                </div>
+                <div class="mid">
+                    <div class="col-1">
+                    <!-- <input class="check" type="checkbox" name="country" value="Algeria">Algeria<br>
+                    <input class="check" type="checkbox" name="country" value="Benin">Benin<br>
+                    <input class="check" type="checkbox" name="country" value="Botswana">Botswana<br>
+                    <input class="check" type="checkbox" name="country" value="BurkinaFaso">Burkina Faso<br>
+                    <input class="check" type="checkbox" name="country" value="Burundi">Burundi<br>
+                    <input class="check" type="checkbox" name="country" value="Cameroon">Cameroon<br>
+                    <input class="check" type="checkbox" name="country" value="CapeVerde">Cape Verde<br>
+                    <input class="check" type="checkbox" name="country" value="CotedIvoire">Cote d'Ivoire<br>
+                    <input class="check" type="checkbox" name="country" value="Egypt">Egypt<br>
+                    <input class="check" type="checkbox" name="country" value="Ethiopia">Ethiopia<br>
+                    <input class="check" type="checkbox" name="country" value="Gabon">Gabon<br>
+                    <input class="check" type="checkbox" name="country" value="Ghana">Ghana<br>
+                    <input class="check" type="checkbox" name="country" value="Kenya">Kenya<br>
+                    <input class="check" type="checkbox" name="country" value="Lesotho">Lesotho<br>
+                    <input class="check" type="checkbox" name="country" value="Liberia">Liberia<br>
+                    <input class="check" type="checkbox" name="country" value="Madagascar">Madagascar<br>
+                    <input class="check" type="checkbox" name="country" value="Malawi">Malawi<br>
+                    <input class="check" type="checkbox" name="country" value="Mali">Mali<br> -->
+                    
+                    <input type="radio" name="country" value="Algeria" checked="checked">Algeria<br>
+                    <input type="radio" name="country" value="Benin">Benin<br>
+                    <input type="radio" name="country" value="Botswana">Botswana<br>
+                    <input type="radio" name="country" value="BurkinaFaso">Burkina Faso<br>
+                    <input type="radio" name="country" value="Burundi">Burundi<br>
+                    <input type="radio" name="country" value="Cameroon">Cameroon<br>
+                    <input type="radio" name="country" value="CapeVerde">Cape Verde<br>
+                    <input type="radio" name="country" value="CotedIvoire">Cote d'Ivoire<br>
+                    <input type="radio" name="country" value="Egypt">Egypt<br>
+                    <input type="radio" name="country" value="Ethiopia">Ethiopia<br>
+                    <input type="radio" name="country" value="Gabon">Gabon<br>
+                    <input type="radio" name="country" value="Ghana">Ghana<br>
+                    <input type="radio" name="country" value="Kenya">Kenya<br>
+                    <input type="radio" name="country" value="Lesotho">Lesotho<br>
+                    <input type="radio" name="country" value="Liberia">Liberia<br>
+                    <input type="radio" name="country" value="Madagascar">Madagascar<br>
+                    <input type="radio" name="country" value="Malawi">Malawi<br>
+                    <input type="radio" name="country" value="Mali">Mali<br>
+
+                    </div>
+                    <div class="col-2">
+                    <!-- <input class="check" type="checkbox" name="country" value="Mauritius">Mauritius<br>
+                    <input class="check" type="checkbox" name="country" value="Morocco">Morocco<br>
+                    <input class="check" type="checkbox" name="country" value="Mozambique">Mozambique<br>
+                    <input class="check" type="checkbox" name="country" value="Namibia">Namibia<br>
+                    <input class="check" type="checkbox" name="country" value="Niger">Niger<br>
+                    <input class="check" type="checkbox" name="country" value="Nigeria">Nigeria<br>
+                    <input class="check" type="checkbox" name="country" value="SaoTomePrincipe">Sao Tome and Principe<br>
+                    <input class="check" type="checkbox" name="country" value="Senegal">Senegal<br>
+                    <input class="check" type="checkbox" name="country" value="SierraLeone">Sierra Leone<br>
+                    <input class="check" type="checkbox" name="country" value="SouthAfrica">South Africa<br>
+                    <input class="check" type="checkbox" name="country" value="Sudan">Sudan<br>
+                    <input class="check" type="checkbox" name="country" value="Swaziland">Swaziland<br>
+                    <input class="check" type="checkbox" name="country" value="Tanzania">Tanzania<br>
+                    <input class="check" type="checkbox" name="country" value="Togo">Togo<br>
+                    <input class="check" type="checkbox" name="country" value="Tunisia">Tunisia<br>
+                    <input class="check" type="checkbox" name="country" value="Uganda">Uganda<br>
+                    <input class="check" type="checkbox" name="country" value="Zambia">Zambia<br>
+                    <input class="check" type="checkbox" name="country" value="Zimbabwe">Zimbabwe<br> -->
+                    <input type="radio" name="country" value="Mauritius">Mauritius<br>
+                    <input type="radio" name="country" value="Morocco">Morocco<br>
+                    <input type="radio" name="country" value="Mozambique">Mozambique<br>
+                    <input type="radio" name="country" value="Namibia">Namibia<br>
+                    <input type="radio" name="country" value="Niger">Niger<br>
+                    <input type="radio" name="country" value="Nigeria">Nigeria<br>
+                    <input type="radio" name="country" value="SaoTomePrincipe">Sao Tome and Principe<br>
+                    <input type="radio" name="country" value="Senegal">Senegal<br>
+                    <input type="radio" name="country" value="SierraLeone">Sierra Leone<br>
+                    <input type="radio" name="country" value="SouthAfrica">South Africa<br>
+                    <input type="radio" name="country" value="Sudan">Sudan<br>
+                    <input type="radio" name="country" value="Swaziland">Swaziland<br>
+                    <input type="radio" name="country" value="Tanzania">Tanzania<br>
+                    <input type="radio" name="country" value="Togo">Togo<br>
+                    <input type="radio" name="country" value="Tunisia">Tunisia<br>
+                    <input type="radio" name="country" value="Uganda">Uganda<br>
+                    <input type="radio" name="country" value="Zambia">Zambia<br>
+                    <input type="radio" name="country" value="Zimbabwe">Zimbabwe<br>
+                    <input name="submit" id="submit" type="submit" value="Submit">
+                    </div>  
+
+                </div>
+                
+                
+            </form>
+        </div>
+        
+    </body>
+</html>

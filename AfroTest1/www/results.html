@@ -1,0 +1,341 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Results</title>
+    <link href="styles2.css" rel="stylesheet" type="text/css">
+    <script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="flot/jquery.flot.js"></script>
+    <script language="javascript" type="text/javascript" src="flot/jquery.flot.resize.js"></script>
+    <script language="javascript" type="text/javascript" src="flot/jquery.flot.categories.js"></script>
+    <script language="javascript" type="text/javascript" src="flot/jquery.flot.pie.js"></script>
+    <style type="text/css">
+    html, body {
+        height: 100%; /* make the percentage height on placeholder work */
+    }
+
+    .demo-container {
+        position: relative;
+        height: 55%;
+        width: 80%;
+    }
+
+    #placeholder {
+        width: 550px;
+    }
+
+    </style>
+
+    <script type="text/javascript">
+
+    
+
+    function getObjectByKeyValue(key,value,array){
+        var i, length = array.length;
+        console.log(value.length);
+
+        for(i = 0; i < length; i++){
+            if(array[i] && array[i].hasOwnProperty(key)){
+               if(array[i][key] == value){
+                    return array[i];
+                }
+            }
+        }
+
+        return -1;
+
+    }
+
+    function getQuestion(key,array){
+        var i, length = array.length;
+        for(i = 0; i < length; i++){
+            if(array[i] && array[i].hasOwnProperty(key)){
+                return array[i];
+            }
+        }
+    }
+
+    function updateDataVals(JSONValues){
+        var data = [];
+        //console.log(JSONValues);
+        for(name in JSONValues){
+            if(name == "_id" || name == "Country" || name == "(N)" || name == "Mean" || name == "Standard Deviation" || name == "Base mean"){
+            //var val = JSONValues[name];
+                //console.log(name + "not used");
+            //console.log(val);
+            }else{
+                var val = JSONValues[name];
+                data.push({label:name,data:val});
+            }   
+        }   
+        return data;
+    }
+
+    function updateBarGraphVals(JSONValues){
+        var data = [];
+        for(name in JSONValues){
+            if(name == "_id" || name == "Country" || name == "(N)" || name == "Mean" || name == "Standard Deviation" || name == "Base mean"){
+
+            }else{
+                var val = JSONValues[name];
+                data.push([name,val]);
+            }
+        }
+        return data;
+    }
+
+    function getParameterByName(name, url) {
+            if (!url) {
+              url = window.location.href;
+            }
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+            makeAjax(topicVal);
+    }
+   
+
+
+
+$(document).ready(function() {
+        
+        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+        
+
+        var topic = getParameterByName('topic');
+        var countries = getParameterByName('countries');
+        //console.log(countries);
+        var res = countries.split(",");
+        console.log(res);
+  
+        
+
+        //some query here
+        //grab topic and countries
+        //initialize data dictionary
+    
+        /*
+            AJAX call to retrieve the mongoDB page of the topic requested
+        */
+        $.ajax({
+            url: 'http://172.21.109.11:8080',
+            data: "{\"collection\":\""+ topic +"\"}",
+            type: 'POST',
+        //dataType: 'jsonp',
+        //jsonpCallback: 'callback', // this is not relevant to the POST anymore
+            success: function (chunk) {
+   
+            //console.log(data);
+            
+            var ret = JSON.parse(chunk);
+
+            var cVal = getObjectByKeyValue('Country',countries,ret);
+
+            var qVal = getQuestion('question',ret);
+    
+            document.getElementById("question").innerHTML = qVal.question;
+            
+            //set data for the bar and pie graphs
+            var data = updateDataVals(cVal);
+            var data1 = updateBarGraphVals(cVal);
+
+
+            var placeholder1 = $("#placeholder1");
+            var placeholder = $("#placeholder");
+
+
+            $("#pieopt").click(function(){
+                placeholder.unbind();
+                $.plot(placeholder, data, {
+                    series: {
+                        pie: { 
+                            show: true
+                        }
+                    }
+                });
+
+            setCode([
+                "$.plot('#placeholder', data, {",
+                "    series: {",
+                "        pie: {",
+                "            show: true",
+                "        }",
+                "    }",
+                "});"
+            ]);
+
+                placeholder.resize();
+           });
+
+
+
+        $("#baropt").click(function() {
+            placeholder1.unbind();
+            $.plot("#placeholder1", [ data1 ], {
+                series: {
+                    bars: {
+                        show: true,
+                        barWidth: 0.6,
+                        align: "center"
+                    }
+                },
+                xaxis: {
+                    mode: "categories",
+                    tickLength: 0
+                }
+            });
+
+            placeholder1.resize();
+
+        });
+
+     
+
+        $("#pieopt").click();
+
+        },
+        error: function (xhr, status, error) {
+            document.getElementById('Error: ' +  error.message);
+            console.log('Error: ' + error.message);
+            //$('#lblResponse').html('Error connecting to the server.');
+           
+        }
+        // $("#baropt").click();
+    });
+
+  
+    
+    });
+    
+
+
+        /*
+        var question;
+
+        document.getElementById("question").innerHTML = question;
+
+        var placeholder1 = $("#placeholder1");
+        var placeholder = $("#placeholder");
+
+        $("#pieopt").click(function() {
+
+            placeholder.unbind();
+
+            // $("#title").text("Default pie chart");
+            // $("#description").text("The default pie chart with no options set.");
+
+            $.plot(placeholder, data, {
+                series: {
+                    pie: { 
+                        show: true
+                    }
+                }
+            });
+
+            setCode([
+                "$.plot('#placeholder', data, {",
+                "    series: {",
+                "        pie: {",
+                "            show: true",
+                "        }",
+                "    }",
+                "});"
+            ]);
+
+            placeholder.resize();
+        });
+
+        $("#baropt").click(function() {
+
+            $.plot("#placeholder1", [ data1 ], {
+                series: {
+                    bars: {
+                        show: true,
+                        barWidth: 0.6,
+                        align: "center"
+                    }
+                },
+                xaxis: {
+                    mode: "categories",
+                    tickLength: 0
+                }
+            });
+
+            placeholder1.resize();
+
+        });
+
+        $("#pieopt").click();
+        // $("#baropt").click();
+
+
+    });
+    */
+
+    // A custom label formatter used by several of the plots
+
+    function labelFormatter(label, series) {
+        return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+    }
+
+    function setCode(lines) {
+        $("#code").text(lines.join("\n"));
+    }
+
+    </script>
+
+ </head>
+ <body>
+    <div>
+       <h2>Results</h2> 
+       <div id="farright">
+            <button id="back" onclick="goBack()">Back</button>
+       </div>
+    </div>
+
+    <script>
+    function goBack() {
+        window.history.back();
+    }
+    </script>
+    
+    <div>
+        <p id="question"></p>
+        <p id="error"></p>
+    </div>
+
+    <div>
+        <h3 id="title"></h3>
+        <div id="optionsdiv">
+            <button class="options" id="pieopt">Pie</button>
+            <button class="options" id="baropt">Bar</button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function(){
+            $("#example-1").click();
+            $("#pieopt").click();
+            $('.options').click(function(){
+                  $('.demo-container').hide();
+                  $('#'+$(this).attr('id')+'Div').show();
+            });
+        });
+    </script>
+    
+    <div class="demo-container" id="pieoptDiv">
+        <div id="placeholder" class="demo-placeholder" style="width:100%;height:100%;"></div>
+    </div>
+
+    <div class="demo-container" id="baroptDiv" style="display:none">
+        <div id="placeholder1" class="demo-placeholder" style="width:100%;height:90%;" ></div>
+    </div>
+   
+        
+    
+
+ </body>
+</html>
